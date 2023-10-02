@@ -14,4 +14,84 @@ datasource db {
 model User {
   id String @id @default(uuid())
   name String
+  email String @unique
+  password String
+  role Role @default(CUSTOMER)
+  contactNo String
+  address String
+  profileImg String
+  orders Order[]
+  review ReviewAndRating?
+  createdAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Category {
+
+  id String @id @default(uuid())
+  title String
+  books Book[]
+
+  @@map("category")
+}
+
+model Book {
+   
+   id String @id @default(uuid())
+   title String
+   author String
+   price Float
+   genre String
+   publicationDate String
+   categoryId String
+   reviews ReviewAndRating[]
+
+   category Category @relation(fields: [categoryId], references: [id])
+
+   createdAt DateTime @default(now())
+   updateAt DateTime @updatedAt
+   
+   @@map("books")
+}
+
+model ReviewAndRating{
+  id String @id @default(uuid())
+  review String @db.Text
+  rating Int 
+
+  userId String @unique
+  bookId String
+
+  user User @relation(fields: [userId], references: [id])
+  book Book @relation(fields: [bookId], references: [id])
+
+  createdAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+
+  @@map("review-rating")
+}
+
+model Order{
+  id String @id @default(uuid())
+  userId String
+  orderedBooks Json[]
+  status Status @default(PENDING)
+  
+  user User @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+
+  @@map("orders")
+}
+
+enum Role {
+   ADMIN
+   CUSTOMER
+}
+enum Status {
+   PENDING
+   SHIPPED
+   DELIVERED
 }
