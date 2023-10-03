@@ -16,7 +16,7 @@ model User {
   name String
   email String @unique
   password String
-  role Role @default(CUSTOMER)
+  role Role @default(customer)
   contactNo String
   address String
   profileImg String
@@ -77,7 +77,7 @@ model Order{
   id String @id @default(uuid())
   userId String
   orderedBooks Json[]
-  status Status @default(PENDING)
+  status Status @default(pending)
   
   user User @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
@@ -87,11 +87,11 @@ model Order{
 }
 
 enum Role {
-   ADMIN
-   CUSTOMER
+   admin
+   customer
 }
 enum Status {
-   PENDING
-   SHIPPED
-   DELIVERED
+   pending
+   shipped
+   delivered
 }

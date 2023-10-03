@@ -11,7 +11,7 @@ route.post(
   AuthController.userSingUp
 );
 route.post(
-  "/login",
+  "/signin",
   ZodValidation(AuthValidation.login),
   AuthController.userLogin
 );
