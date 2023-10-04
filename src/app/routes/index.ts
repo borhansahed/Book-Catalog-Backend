@@ -3,6 +3,7 @@ import { AuthRouter } from "../modules/auth/auth.route";
 import { IRoutes } from "./route.interface";
 import { UserRoute } from "../modules/user/user.route";
 import { CategoryRoute } from "../modules/category/category.route";
+import { BookRouter } from "../modules/book/book.route";
 
 const routes = express.Router();
 
@@ -18,6 +19,10 @@ const moduleRoutes: IRoutes[] = [
   {
     path: "/categories",
     route: CategoryRoute,
+  },
+  {
+    path: "/books",
+    route: BookRouter,
   },
 ];
 
