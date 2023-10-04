@@ -1,4 +1,4 @@
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt, { JwtPayload, Secret } from "jsonwebtoken";
 
 const jwtCreate = (data: Record<string, unknown>, secret: string): string => {
   return jwt.sign({ data }, secret as string, {
@@ -6,7 +6,7 @@ const jwtCreate = (data: Record<string, unknown>, secret: string): string => {
   });
 };
 
-const jwtVerify = (token: string, secret: string): JwtPayload => {
+const jwtVerify = (token: string, secret: Secret): JwtPayload => {
   return jwt.verify(token, secret) as JwtPayload;
 };
 

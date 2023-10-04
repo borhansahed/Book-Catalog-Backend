@@ -5,7 +5,7 @@ const signup = z.object({
     name: z.string({ required_error: "Name is required" }),
     email: z.string({ required_error: "Email is required" }).email(),
     password: z.string({ required_error: "Name is required" }),
-    role: z.literal("customer"),
+    role: z.string().optional(),
     contactNo: z
       .string({ required_error: "ContactNo is required" })
       .regex(/^\d{10}$/),

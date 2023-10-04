@@ -1,4 +1,4 @@
-import { IPagination } from "../interface/pagination.interface";
+import { IPagination } from "../types/pagination.type";
 
 const calculation = (options: Partial<IPagination>) => {
   const page = Number(options.page || 1);

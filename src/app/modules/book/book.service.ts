@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Book } from "@prisma/client";
 import prisma from "../../../helper/prisma";
-import { IPagination } from "../../../interface/pagination.interface";
+import { IPagination } from "../../../types/pagination.type";
 import { PaginationHelper } from "../../../helper/paginationHelper";
 import { IFilters } from "./book.interface";
 import { BookSearchFields } from "./book.constants";

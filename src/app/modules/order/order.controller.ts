@@ -1,9 +1,13 @@
-import { RequestHandler } from "express";
+import { NextFunction, RequestHandler, Response } from "express";
 import { OrderService } from "./order.service";
 
-const createOrder: RequestHandler = async (req, res, next) => {
+const createOrder: RequestHandler = async (req: any, res, next) => {
   try {
-    const result = await OrderService.createOrder(req.body);
+    const userId = req.user.data.userId;
+    const result = await OrderService.createOrder({
+      ...req.body,
+      userId,
+    });
 
     res.status(200).json({
       success: true,
@@ -15,9 +19,9 @@ const createOrder: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
-const getAllOrder: RequestHandler = async (req, res, next) => {
+const getAllOrder = async (req: any, res: Response, next: NextFunction) => {
   try {
-    const result = await OrderService.getAllOrder();
+    const result = await OrderService.getAllOrder(req.user.data);
 
     res.status(200).json({
       success: true,
