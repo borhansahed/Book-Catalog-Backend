@@ -4,6 +4,7 @@ import { IRoutes } from "./route.interface";
 import { UserRoute } from "../modules/user/user.route";
 import { CategoryRoute } from "../modules/category/category.route";
 import { BookRouter } from "../modules/book/book.route";
+import { OrderRoute } from "../modules/order/order.route";
 
 const routes = express.Router();
 
@@ -23,6 +24,10 @@ const moduleRoutes: IRoutes[] = [
   {
     path: "/books",
     route: BookRouter,
+  },
+  {
+    path: "/orders",
+    route: OrderRoute,
   },
 ];
 

@@ -109,9 +109,43 @@ const getBookByCategory = async (id: string) => {
     data: result,
   };
 };
+const getBookById = async (id: string): Promise<Book | null> => {
+  const result = await prisma.book.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  return result;
+};
+const updateBookById = async (
+  id: string,
+  payload: Partial<Book>
+): Promise<Book | null> => {
+  const result = await prisma.book.update({
+    where: {
+      id,
+    },
+    data: payload,
+  });
+
+  return result;
+};
+const deleteBookById = async (id: string): Promise<Book | null> => {
+  const result = await prisma.book.delete({
+    where: {
+      id,
+    },
+  });
+
+  return result;
+};
 
 export const BookService = {
   createBook,
   getAllBook,
   getBookByCategory,
+  getBookById,
+  updateBookById,
+  deleteBookById,
 };
