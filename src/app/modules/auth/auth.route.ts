@@ -12,7 +12,7 @@ route.post(
 );
 route.post(
   "/signin",
-  ZodValidation(AuthValidation.login),
+  // ZodValidation(AuthValidation.login),
   AuthController.userLogin
 );
 route.get("/", (req, res) => {

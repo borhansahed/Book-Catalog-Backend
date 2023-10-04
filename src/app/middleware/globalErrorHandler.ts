@@ -29,11 +29,12 @@ const globalErrorHandler: ErrorRequestHandler = async (err, req, res, next) => {
       ]);
   } else if (err instanceof PrismaClientKnownRequestError) {
     const prismaError = err.message.split("\n");
+    const metaError = JSON.stringify(err.meta).split('"');
     statuscode = 400;
     (message = "PrismaClientKnownRequestError"),
       (errorMessages = [
         {
-          path: err.meta?.target?.toString(),
+          path: metaError[metaError.length - 2],
           message: prismaError[prismaError.length - 1],
         },
       ]);
