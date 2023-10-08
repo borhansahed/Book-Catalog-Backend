@@ -1,6 +1,4 @@
 import { ErrorRequestHandler } from "express";
-import { ZodError } from "zod";
-import { handleZodError } from "../../error/handleZodError";
 import {
   PrismaClientKnownRequestError,
   PrismaClientValidationError,
@@ -11,12 +9,7 @@ const globalErrorHandler: ErrorRequestHandler = async (err, req, res, next) => {
   let statuscode = 500;
   let message = "Something went wrong";
   let errorMessages;
-  if (err instanceof ZodError) {
-    const simplifiedError = handleZodError(err);
-    statuscode = simplifiedError.statusCode;
-    message = simplifiedError.message;
-    errorMessages = simplifiedError.errorMessages;
-  } else if (err instanceof PrismaClientValidationError) {
+  if (err instanceof PrismaClientValidationError) {
     const splitError = err.message.split(")");
 
     statuscode = 400;

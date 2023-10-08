@@ -9,21 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const zod_1 = require("zod");
-const handleZodError_1 = require("../../error/handleZodError");
 const library_1 = require("@prisma/client/runtime/library");
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const globalErrorHandler = (err, req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     let statuscode = 500;
     let message = "Something went wrong";
     let errorMessages;
-    if (err instanceof zod_1.ZodError) {
-        const simplifiedError = (0, handleZodError_1.handleZodError)(err);
-        statuscode = simplifiedError.statusCode;
-        message = simplifiedError.message;
-        errorMessages = simplifiedError.errorMessages;
-    }
-    else if (err instanceof library_1.PrismaClientValidationError) {
+    if (err instanceof library_1.PrismaClientValidationError) {
         const splitError = err.message.split(")");
         statuscode = 400;
         (message = "PrismaClientValidationError"),
